@@ -1,9 +1,13 @@
 package com.project.dragaosemchama.superbluetooth;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,6 +43,7 @@ public class MainBluetoothActivity extends ActionBarActivity {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH);
                 statusMessage.setText("Solicitando ativação do Bluetooth...");
+
             } else {
                 statusMessage.setText("Bluetooth já ativado :)");
             }

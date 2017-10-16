@@ -1,5 +1,6 @@
 package com.project.dragaosemchama.superbluetooth;
 
+import android.Manifest;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -7,7 +8,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +45,12 @@ public class DiscoveredDevices extends ListActivity {
          */
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         setListAdapter(arrayAdapter);
+
+        /*  Pede permissao de localizaçao ao usuario.
+        *   Necessario para API > 22 */
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1001);
+        }
 
         /*  Usa o adaptador Bluetooth padrão para iniciar o processo de descoberta.
          */
